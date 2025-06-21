@@ -1,0 +1,258 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    transition: all 0.3s ease;
+}
+
+body.dark {
+    background: linear-gradient(135deg, #1e1e2f 0%, #2a2a4a 100%);
+    color: #fff;
+}
+
+header {
+    text-align: center;
+    padding: 40px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+header .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff6f61;
+}
+
+header h1 {
+    margin: 10px 0;
+    font-size: 36px;
+}
+
+header p {
+    color: #666;
+    font-size: 18px;
+}
+
+body.dark header p {
+    color: #ccc;
+}
+
+#searchBar {
+    margin-top: 20px;
+    padding: 10px;
+    width: 300px;
+    border: none;
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.2);
+    color: #333;
+}
+
+body.dark #searchBar {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.container {
+    display: flex;
+    max-width: 1400px;
+    margin: 20px auto;
+    gap: 20px;
+}
+
+.sidebar {
+    width: 300px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    padding: 20px;
+    transition: transform 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.sidebar.collapsed {
+    transform: translateX(-260px);
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.toggle-sidebar {
+    cursor: pointer;
+    font-size: 20px;
+    color: #333;
+    transition: transform 0.3s ease;
+}
+
+body.dark .toggle-sidebar {
+    color: #fff;
+}
+
+.toggle-sidebar:hover {
+    transform: scale(1.2);
+}
+
+.sidebar ul {
+    list-style: none;
+    margin-top: 20px;
+}
+
+.sidebar li {
+    padding: 15px;
+    margin: 5px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.sidebar li:hover, .sidebar li.active {
+    background: #ff6f61;
+    color: white;
+}
+
+.sidebar li.completed::after {
+    content: "\f058";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    right: 10px;
+    color: #4caf50;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+}
+
+.video-player {
+    text-align: center;
+}
+
+#videoContainer {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+    overflow: hidden;
+}
+
+#videoContainer iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: #ff6f61;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background: #e55a50;
+}
+
+.btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+.progress-bar {
+    margin-top: 20px;
+}
+
+#progressFill {
+    height: 10px;
+    background: #ff6f61;
+    border-radius: 5px;
+    width: 0;
+    transition: width 0.3s ease;
+}
+
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    font-size: 24px;
+    color: #333;
+    z-index: 1000; /* High z-index to stay above sidebar */
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+body.dark .theme-toggle {
+    color: #fff;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+}
+
+/* Floating button to reopen sidebar */
+.reopen-sidebar {
+    position: fixed;
+    top: 80px;
+    left: 10px;
+    cursor: pointer;
+    font-size: 24px;
+    color: #333;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    border-radius: 50%;
+    z-index: 100;
+    display: none;
+    transition: all 0.3s ease;
+}
+
+body.dark .reopen-sidebar {
+    color: #fff;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.reopen-sidebar:hover {
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        transform: translateX(0);
+    }
+    .sidebar.collapsed {
+        transform: translateX(-100%);
+    }
+    #videoContainer {
+        padding-bottom: 75%; /* Adjust for mobile */
+    }
+    .reopen-sidebar {
+        display: block; /* Show on mobile when sidebar is collapsed */
+    }
+}
